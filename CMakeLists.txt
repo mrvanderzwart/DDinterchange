@@ -1,0 +1,11 @@
+project(DDexchange)
+
+set(SOURCES
+    dd_exchange.hpp
+    dd_exchange.cpp
+    sdd_essentials.hpp
+)
+set(ENV{LD_LIBRARY_PATH} "/usr/local/lib")
+
+add_executable(peg-solitaire peg-solitaire.cpp ${SOURCES})
+target_link_libraries(peg-solitaire sylvan sdd)
