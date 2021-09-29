@@ -147,8 +147,6 @@ class Sdd : public DD<Sdd>
     Sdd Xnor(const Sdd& g) const;
     Sdd RelNext(const Sdd& relation, const SddSet& cube) const;
     
-    int isOne() const;
-    
     size_t NodeCount() const;
     
     static SddManager* Manager;
