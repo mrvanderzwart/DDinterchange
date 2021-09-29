@@ -10,3 +10,6 @@ set(CMAKE_CXX_FLAGS "-fconcepts")
 
 add_executable(peg-solitaire peg-solitaire.cpp ${SOURCES})
 target_link_libraries(peg-solitaire sylvan sdd)
+
+add_executable(test test.cpp ${SOURCES})
+target_link_libraries(test sylvan sdd)
