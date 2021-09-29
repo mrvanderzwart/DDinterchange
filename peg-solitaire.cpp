@@ -219,11 +219,10 @@ void printboardsSDD(int *e)
 void 
 PegSolitaire::PrintBoards(dd &D, std::string name) 
 {
-  //LACE_ME;
+  //LACE_ME; //BDD
   printf("Printing boards: %s \n", name.c_str());
-  //sylvan_enum(D.GetDD(), SourceVars.GetDD(), printboard, this);
-  SddExtra::set_enum(D.GetDD(), Sdd::Manager, printboardsSDD);
-  //DecisionDiagram::set_enum();
+  //sylvan_enum(D.GetDD(), SourceVars.GetDD(), printboard, this); //BDD
+  SddExtra::set_enum(D.GetDD(), Sdd::Manager, printboardsSDD); //SDD
 }
 
 VOID_TASK_IMPL_4(printboard, void*, ctx, BDDVAR*, VA, uint8_t*, values, int, count) {
@@ -251,15 +250,6 @@ VOID_TASK_IMPL_4(printboard, void*, ctx, BDDVAR*, VA, uint8_t*, values, int, cou
 int main()
 {
   PegSolitaire game;
-  game.CreateInitialBoard();
-  game.CreateMoveRelation();
-  game.PrintBoards(game.InitialBoard, "Init");
-  game.InitialBoard = game.InitialBoard.RelNext(game.MoveRelation, game.RelationVars);
-  game.PrintBoards(game.InitialBoard, "Next");
-
-  //game.CreateWinningBoards();
-  //game.CreateMoveRelation();
-  //game.PrintBoards(game.InitialBoard, "Initial");
-  //game.InitialBoard = game.InitialBoard.RelNext(game.MoveRelation, game.RelationVars);
-  //game.PrintBoards(game.InitialBoard, "Next");
+  game.CreateWinningBoards();
+  game.PrintBoards(game.WinningBoards, "WinningBoards");
 }
