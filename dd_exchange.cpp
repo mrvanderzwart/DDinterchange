@@ -225,31 +225,24 @@ Sdd::Xnor(const Sdd& g) const
 Sdd
 Sdd::RelNext(const Sdd& relation, const SddSet& state) const
 {
-  std::vector<SddLiteral> SourceVars;  
-  std::vector<SddLiteral> TargetVars;
-  
-  for (int i = 0; i < sdd_manager_var_count(Manager)/2; i++)
-    SourceVars.push_back(state.set[i]);
-  for (int i = sdd_manager_var_count(Manager)/2; i < sdd_manager_var_count(Manager); i++)
-    TargetVars.push_back(state.set[i]);
-
+  int n_variables = sdd_manager_var_count(Manager);
   SDD Rn = sdd_conjoin(sdd, relation.sdd, Manager);
-  int *exists_map = (int*)malloc(sdd_manager_var_count(Manager)*sizeof(SddLiteral));
-  SddLiteral *variable_map = (SddLiteral*)malloc(sdd_manager_var_count(Manager)*sizeof(SddLiteral));
-  for (unsigned i = 0; i < SourceVars.size(); i++)
+  int *exists_map = (int*)malloc((n_variables+1)*sizeof(int));
+  SddLiteral *variable_map = (SddLiteral*)malloc((n_variables+1)*sizeof(SddLiteral));
+  
+  for (int i = 1; i <= n_variables; i++)
   {
-    exists_map[SourceVars[i]] = 1;    
-    variable_map[TargetVars[i]] = SourceVars[i];  
+    exists_map[i] = 0;
+    variable_map[i] = 0;
   }
   
+  for (int i = 0; i < n_variables/2; i++)
+  {
+    exists_map[state.set[i]] = 1;    
+    variable_map[state.set[i+n_variables/2]] = state.set[i];  
+  }
   SDD Sn = sdd_exists_multiple(exists_map, Rn, Manager);  
   return sdd_rename_variables(Sn, variable_map, Manager);
-}
-
-int
-Sdd::isOne() const
-{
-  return sdd == sdd_manager_true(Sdd::Manager);
 }
 
 size_t
