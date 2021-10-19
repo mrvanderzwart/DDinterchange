@@ -6,23 +6,7 @@
 
 using namespace sylvan;
 
-SddManager* Sdd::Manager = sdd_manager_create(3,0);
-
-void test_xnor(int a, int b) {
-  SDD aa, bb;
-  if (a == 1) aa = sdd_manager_true(Sdd::Manager);
-  else        aa = sdd_manager_false(Sdd::Manager);
-  if (b == 1) bb = sdd_manager_true(Sdd::Manager);
-  else        bb = sdd_manager_false(Sdd::Manager);
-
-  std::cout << "aa   = " << sdd_node_is_true(aa) << std::endl;
-  std::cout << "bb   = " << sdd_node_is_true(bb) << std::endl;
-  SDD res = sdd_disjoin(sdd_conjoin(aa, bb, Sdd::Manager), 
-                        sdd_conjoin(sdd_negate(aa, Sdd::Manager), 
-                                    sdd_negate(bb, Sdd::Manager), 
-                                    Sdd::Manager), Sdd::Manager);
-  std::cout << "XNOR = " << sdd_node_is_true(res) << std::endl << std::endl;
-}
+SddManager* SddEssentials::Manager = sdd_manager_create(3,0);
 
 int main()
 {
@@ -57,10 +41,4 @@ int main()
   //demorgan
   assert(!(a|b) == (!a&!b));
   assert(!(a&b) == (!a|!b));
-
-
-  test_xnor(0, 0);
-  test_xnor(0, 1);
-  test_xnor(1, 0);
-  test_xnor(1, 1);
 }
