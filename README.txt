@@ -15,8 +15,8 @@
  * http://reasoning.cs.ucla.edu/sdd/
  * perform steps:
  *   scons
- *	 cp sddapi.h/usr/local/include/sddapi.h
- *	 cp build/libsdd.so/usr/local/lib/libsdd.so
+ *	  cp sddapi.h /usr/local/include/sddapi.h
+ *	  cp build/libsdd.so /usr/local/lib/libsdd.so
  *   ldconfig
 */
 
