@@ -324,7 +324,7 @@ BddSet::toVector() const
 void 
 SddSet::add(SddLiteral variable) 
 { 
-  set.push_back(variable);
+  set.push_back(variable+1);
 }
 
 void 
