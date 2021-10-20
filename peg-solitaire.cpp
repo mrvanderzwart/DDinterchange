@@ -52,11 +52,7 @@ class PegSolitaire
 
 PegSolitaire::PegSolitaire()
 {
-  ddvar var;
-  if (dd_choice) 
-    var = 0;
-  else          
-    var = 1;
+  ddvar var = 0;
 
   for (int i = 0; i < N; i++) 
   {
